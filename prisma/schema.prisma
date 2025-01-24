@@ -1,0 +1,17 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Invite {
+  id          String   @id @default(uuid())
+  guestName   String   @map("guest_name")
+  code        String
+  phone       String
+  inicialDate DateTime @map("inicial_date")
+  finalDate   DateTime @map("final_date")
+}
