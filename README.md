@@ -14,11 +14,11 @@ Uma solução eficiente para controlar e gerenciar convites de acesso a apartame
 
 ## Endpoints
 
-| Método   | Endpoint            | Descrição                                             |
-| -------- | ------------------- | ----------------------------------------------------- |
-| **POST** | `/invites`          | Cria um novo convite                                  |
-| **GET**  | `/invites`          | Lista todos os convites de uma unidade                |
-| **POST** | `/invites/validate` | Valida se um convite existe e se está expirado ou não |
+| Método   | Endpoint                         | Descrição                                             |
+| -------- | -------------------------------- | ----------------------------------------------------- |
+| **POST** | `/invites`                       | Cria um novo convite                                  |
+| **GET**  | `/invites`                       | Lista todos os convites de uma unidade                |
+| **GET**  | `/invites/validate/{inviteCode}` | Valida se um convite existe e se está expirado ou não |
 
 ## Instalação
 

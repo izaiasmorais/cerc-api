@@ -54,6 +54,7 @@ export async function validateInvite(app: FastifyInstance) {
 					data: null,
 				});
 			}
+			
 			const now = dayjs();
 			const status = dayjs(invite.finalDate).isAfter(now)
 				? "vigente"
