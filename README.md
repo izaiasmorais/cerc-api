@@ -22,14 +22,18 @@ Uma solução eficiente para controlar e gerenciar convites de acesso a apartame
 
 ## Instalação
 
-Clone o repositório:
+Você precisa ter o [Node.js](https://nodejs.org/) instalado na sua máquina, e instalar o pnpm como depedência global.
+```bash
+npm install pnpm -g
+```
 
+Após isso, clone o repositório:
 ```bash
 git clone https://github.com/izaiasmorais/cerc-api
 cd cerc-api
 ```
 
-Instale as dependências:
+Instale as dependências do projeto:
 
 ```bash
 pnpm install
