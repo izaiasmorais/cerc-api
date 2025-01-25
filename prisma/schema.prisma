@@ -10,7 +10,7 @@ datasource db {
 model Invite {
   id          String   @id @default(uuid())
   guestName   String   @map("guest_name")
-  code        String
+  code        String   @unique
   phone       String
   inicialDate DateTime @map("inicial_date")
   finalDate   DateTime @map("final_date")

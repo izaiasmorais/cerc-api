@@ -1,35 +1,32 @@
-# API de Gerenciamento de Prescrições
+# API de gerenciamento de convites
 
 ## Introdução
-Uma api que gerencia prescrições de um médico/profissional de forma completa, com sistema de filtro, paginação e métricas.
+
+Uma solução eficiente para controlar e gerenciar convites de acesso a apartamentos, garantindo segurança e praticidade para moradores e visitantes.
 
 ## Tecnologias
+
 - Linguagem: [Node.js](https://nodejs.org)
 - Framework: [Fastify.js](https://www.fastify.io)
 - Banco de Dados: [PostgreSQL](https://www.postgresql.org)
-- Autenticação: [JWT](https://jwt.io)
 - ORM: [PrismaORM](https://www.prisma.io)
 - Gerenciamento de Dependências: [pnpm](https://pnpm.io)
 
 ## Endpoints
 
-| Método     | Endpoint                   | Descrição                                           |
-|------------|----------------------------|-----------------------------------------------------|
-| **POST**   | `/auth/sign-up`            | Registrar um novo usuário                           |
-| **POST**   | `/auth/sign-in`            | Fazer login e obter o token de autenticação         |
-| **GET**    | `/profile`                 | Obter o perfil do usuário autenticado               |
-| **DELETE** | `/delete-account`          | Excluir a própria conta                             |
-| **GET**    | `/prescriptions`           | Obter todas as prescrições                          |
-| **POST**   | `/prescriptions`           | Criar uma nova prescrição                           |
-| **DELETE** | `/prescriptions/{id}`      | Excluir uma prescrição                              |
-| **PUT**    | `/prescriptions/{id}`      | Editar uma prescrição existente                     |
+| Método   | Endpoint            | Descrição                                             |
+| -------- | ------------------- | ----------------------------------------------------- |
+| **POST** | `/invites`          | Cria um novo convite                                  |
+| **GET**  | `/invites`          | Lista todos os convites de uma unidade                |
+| **POST** | `/invites/validate` | Valida se um convite existe e se está expirado ou não |
 
 ## Instalação
+
 Clone o repositório:
 
 ```bash
-git clone https://github.com/izaiasmorais/prescriptions-api
-cd prescriptions-api
+git clone https://github.com/izaiasmorais/cerc-api
+cd cerc-api
 ```
 
 Instale as dependências:
@@ -41,12 +38,19 @@ pnpm install
 Configure o arquivo .env com suas credenciais:
 
 ```env
-DATABASE_ULR=""
+DATABASE_URL=""
 PORT=""
 JWT_SECRET=""
 ```
 
+Gere o cliente do prisma:
+
+```bash
+pnpm prisma generate
+```
+
 ## Executando o Projeto
+
 Inicie o servidor:
 
 ```bash

@@ -13,6 +13,8 @@ import { errorHandler } from "./error-handler";
 import { env } from "../env";
 import { prisma } from "../libs/prisma";
 import { getInvites } from "./routes/get-invites";
+import { createInvite } from "./routes/create-invite";
+import { validateInvite } from "./routes/validate-invite";
 
 const port = Number(env.PORT);
 
@@ -56,13 +58,15 @@ app.register(fastifyJwt, {
 // Registra o Prisma no contexto do Fastify
 app.decorate("prisma", prisma);
 
-// Rotas
+// Rota base
 app.get("/", async () => {
 	return { message: "Hello World" };
 });
 
-// Autenticação
+// Convites
+app.register(createInvite);
 app.register(getInvites);
+app.register(validateInvite);
 
 try {
 	app.listen({ port, host: "0.0.0.0" });
