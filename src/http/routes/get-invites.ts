@@ -1,8 +1,8 @@
 import { FastifyInstance } from "fastify";
 import { ZodTypeProvider } from "fastify-type-provider-zod";
 import { prisma } from "../../libs/prisma";
+import { isDateValid } from "../../utils/date";
 import z from "zod";
-import dayjs from "dayjs";
 
 export const getInvitesSchema = z.array(
 	z.object({
@@ -40,12 +40,10 @@ export async function getInvites(app: FastifyInstance) {
 		async (_, reply) => {
 			const invites = await prisma.invite.findMany();
 
-			const now = dayjs();
-
 			const invitesWithStatus = invites.map((invite) => {
 				return {
 					...invite,
-					status: dayjs(invite.finalDate).isAfter(now) ? "vigente" : "expirado",
+					status: isDateValid(invite.finalDate),
 				};
 			});
 
