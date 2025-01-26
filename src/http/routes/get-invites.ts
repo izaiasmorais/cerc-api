@@ -30,7 +30,7 @@ export async function getInvites(app: FastifyInstance) {
 						data: getInvitesSchema,
 					}),
 					500: z.object({
-						success: z.literal(false),
+						success: z.boolean(),
 						errors: z.array(z.string()),
 						data: z.literal(null),
 					}),

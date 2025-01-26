@@ -1,6 +1,10 @@
 import { FastifyInstance } from "fastify";
 import { ZodTypeProvider } from "fastify-type-provider-zod";
 import { prisma } from "../../libs/prisma";
+import {
+	formatDate,
+	formatDateToTimezone,
+} from "../../utils/format-date-to-timezone";
 import dayjs from "dayjs";
 import z from "zod";
 
@@ -33,7 +37,7 @@ export async function validateInvite(app: FastifyInstance) {
 				response: {
 					200: validateInviteResponseSchema,
 					500: z.object({
-						success: z.literal(false),
+						success: z.boolean(),
 						errors: z.array(z.string()),
 						data: z.literal(null),
 					}),
@@ -50,15 +54,26 @@ export async function validateInvite(app: FastifyInstance) {
 			if (!invite) {
 				return reply.status(200).send({
 					success: true,
-					errors: [],
+					errors: ["Invalid invite code"],
 					data: null,
 				});
 			}
-			
-			const now = dayjs();
-			const status = dayjs(invite.finalDate).isAfter(now)
-				? "vigente"
-				: "expirado";
+
+			const now = formatDateToTimezone(new Date());
+			const inviteFinalDate = invite.finalDate;
+
+			console.log("Hora Atual", now);
+			console.log("Hora Convite: ", inviteFinalDate);
+			console.log(
+				"Hora Convite Formatada: ",
+				formatDateToTimezone(inviteFinalDate)
+			);
+			console.log("Hora Convite Formatada 2: ", formatDate(inviteFinalDate));
+
+			// se a data/hora atual for maior que a data/hora final do convite
+			const status = dayjs(now).isAfter(inviteFinalDate)
+				? "expirado"
+				: "vigente";
 
 			return reply.status(200).send({
 				success: true,

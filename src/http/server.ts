@@ -15,6 +15,7 @@ import { prisma } from "../libs/prisma";
 import { getInvites } from "./routes/get-invites";
 import { createInvite } from "./routes/create-invite";
 import { validateInvite } from "./routes/validate-invite";
+import { deleteInvite } from "./routes/delete-invite";
 
 const port = Number(env.PORT);
 
@@ -67,6 +68,7 @@ app.get("/", async () => {
 app.register(createInvite);
 app.register(getInvites);
 app.register(validateInvite);
+app.register(deleteInvite);
 
 try {
 	app.listen({ port, host: "0.0.0.0" });

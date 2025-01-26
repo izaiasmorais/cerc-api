@@ -46,8 +46,8 @@ export async function createInvite(app: FastifyInstance) {
 					code: generateInviteCode(),
 					guestName,
 					phone,
-					finalDate,
 					inicialDate,
+					finalDate,
 				},
 			});
 
