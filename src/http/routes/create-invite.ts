@@ -20,10 +20,12 @@ export async function createInvite(app: FastifyInstance) {
 				summary: "Create a new invite",
 				body: createInviteRequestSchema,
 				response: {
-					201: z.object({
+					200: z.object({
 						success: z.boolean(),
 						errors: z.array(z.string()),
-						data: z.literal(null),
+						data: z.object({
+							code: z.string(),
+						}),
 					}),
 					400: z.object({
 						success: z.boolean(),
@@ -41,7 +43,7 @@ export async function createInvite(app: FastifyInstance) {
 		async (request, reply) => {
 			const { guestName, phone, inicialDate, finalDate } = request.body;
 
-			await prisma.invite.create({
+			const invite = await prisma.invite.create({
 				data: {
 					code: generateInviteCode(),
 					guestName,
@@ -51,10 +53,12 @@ export async function createInvite(app: FastifyInstance) {
 				},
 			});
 
-			return reply.status(201).send({
+			return reply.status(200).send({
 				success: true,
 				errors: [],
-				data: null,
+				data: {
+					code: invite.code,
+				},
 			});
 		}
 	);
